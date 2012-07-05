@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
+
   def new
-      @titre = "Inscription"
+    @titre = "Inscription"
   end
 end
