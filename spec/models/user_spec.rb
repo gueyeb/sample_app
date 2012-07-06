@@ -3,16 +3,16 @@ require 'spec_helper'
 
 describe User do
 
-  before(:each) do
-    @attr = { :nom => "Example User", :email => "user@example.com" }
-  end
 
-  it "devrait créer une nouvelle instance dotée des attributs valides" do
-    User.create!(@attr)
-  end
-
-#  it "devrait exiger un nom"
-
+# il set par défaut des valeurs
+before(:each) do
+    @attr = {
+      :nom => "Utilisateur exemple",
+      :email => "user@example.com",
+      :password => "foobar",
+      :password_confirmation => "foobar"
+    }
+##
   it "exige un nom" do
     bad_guy = User.new(@attr.merge(:nom => ""))
     bad_guy.should_not be_valid
@@ -58,4 +58,60 @@ describe User do
     user_with_duplicate_email = User.new(@attr)
     user_with_duplicate_email.should_not be_valid
   end
+
+##
+  describe "password validations" do
+
+    it "devrait exiger un mot de passe" do
+      User.new(@attr.merge(:password => "", :password_confirmation => "")).
+        should_not be_valid
+    end
+
+    it "devrait exiger une confirmation du mot de passe qui correspond" do
+      User.new(@attr.merge(:password_confirmation => "invalid")).
+        should_not be_valid
+    end
+
+    it "devrait rejeter les mots de passe (trop) courts" do
+      short = "a" * 5
+      hash = @attr.merge(:password => short, :password_confirmation => short)
+      User.new(hash).should_not be_valid
+    end
+
+    it "devrait rejeter les (trop) longs mots de passe" do
+      long = "a" * 41
+      hash = @attr.merge(:password => long, :password_confirmation => long)
+      User.new(hash).should_not be_valid
+    end
+  end
+
+##
+    describe "password encryption" do
+
+      before(:each) do
+        @user = User.create!(@attr)
+      end
+      
+      it "devrait avoir un attribut  mot de passe crypté" do
+        @user.should respond_to(:encrypted_password)
+      end
+      
+      it "devrait définir le mot de passe crypté" do
+        @user.encrypted_password.should_not be_blank
+      end
+    end
+  end
 end
+
+# == Schema Information
+#
+# Table name: users
+#
+#  id                 :integer         not null, primary key
+#  nom                :string(255)
+#  email              :string(255)
+#  created_at         :datetime
+#  updated_at         :datetime
+#  encrypted_password :string(255)
+#
+
