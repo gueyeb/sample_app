@@ -1,0 +1,10 @@
+# Logfile created on Fri Jul 06 16:30:39 +0200 2012 by logger.rb/1.2.6
+REQUESTING PAGE: GET /signup with {} and HTTP headers {}
+REQUESTING PAGE: GET /signup with {} and HTTP headers {}
+REQUESTING PAGE: GET /signup with {} and HTTP headers {}
+REQUESTING PAGE: GET /signup with {} and HTTP headers {}
+REQUESTING PAGE: GET /signup with {} and HTTP headers {}
+REQUESTING PAGE: POST /users with {"user"=>{"password_confirmation"=>"", "email"=>"", "nom"=>"", "password"=>""}, "commit"=>"Inscription", "utf8"=>"✓"} and HTTP headers {"HTTP_REFERER"=>"/signup"}
+REQUESTING PAGE: GET /signup with {} and HTTP headers {}
+REQUESTING PAGE: POST /users with {"user"=>{"password_confirmation"=>"foobar", "email"=>"user@example.com", "nom"=>"Example User", "password"=>"foobar"}, "commit"=>"Inscription", "utf8"=>"✓"} and HTTP headers {"HTTP_REFERER"=>"/signup"}
+REQUESTING PAGE: GET http://www.example.com/users/1 with {} and HTTP headers {"HTTP_REFERER"=>"/users"}
