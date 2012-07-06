@@ -13,6 +13,11 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
+
+    #Les deux lignes suivantes servent à réinitialiser le pass dans le champ de texte.
+    @user.password = nil
+    @user.password_confirmation = nil
+
     if @user.save
       #Traite un scuccés d'enregistrement.
       flash[:success] = "Bienvenue dans l'Application Exemple!"
