@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 module ApplicationHelper
 
-#retourner un titre basé sur la page
   def titre
+    #etourner un titre basé sur la page
     base_titre = "Simple App du Tutoriel Ruby on Rails"
     if @titre.nil?
       base_titre
